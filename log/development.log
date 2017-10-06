@@ -1,0 +1,403 @@
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5509339540454410290)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateLands (20171006033935)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.2ms)[0m  [1m[35mCREATE TABLE "lands" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171006033935"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAttractions (20171006034011)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (33.6ms)[0m  [1m[35mCREATE TABLE "attractions" ("id" bigserial primary key, "name" character varying, "land_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_8e0b15d400"
+FOREIGN KEY ("land_id")
+  REFERENCES "lands" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_attractions_on_land_id" ON "attractions"  ("land_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171006034011"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDinings (20171006034024)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "dinings" ("id" bigserial primary key, "name" character varying, "land_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_ef8b2e4919"
+FOREIGN KEY ("land_id")
+  REFERENCES "lands" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_dinings_on_land_id" ON "dinings"  ("land_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171006034024"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-10-06 03:40:43.199408"], ["updated_at", "2017-10-06 03:40:43.199408"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5509339540454410290)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.2ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Main Street, U.S.A."], ["created_at", "2017-10-06 03:41:30.453606"], ["updated_at", "2017-10-06 03:41:30.453606"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "New Orleans Square"], ["created_at", "2017-10-06 03:41:30.464199"], ["updated_at", "2017-10-06 03:41:30.464199"]]
+  [1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Critter Country"], ["created_at", "2017-10-06 03:41:30.471748"], ["updated_at", "2017-10-06 03:41:30.471748"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Frontierland"], ["created_at", "2017-10-06 03:41:30.474147"], ["updated_at", "2017-10-06 03:41:30.474147"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fantasyland"], ["created_at", "2017-10-06 03:41:30.475931"], ["updated_at", "2017-10-06 03:41:30.475931"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Mickey's Toontown"], ["created_at", "2017-10-06 03:41:30.477434"], ["updated_at", "2017-10-06 03:41:30.477434"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tomorrowland"], ["created_at", "2017-10-06 03:41:30.479030"], ["updated_at", "2017-10-06 03:41:30.479030"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "lands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Adventureland"], ["created_at", "2017-10-06 03:41:30.481180"], ["updated_at", "2017-10-06 03:41:30.481180"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (25.6ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Disneyland Railroad"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.503352"], ["updated_at", "2017-10-06 03:41:30.503352"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.3ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Main Street Vehicles"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.532954"], ["updated_at", "2017-10-06 03:41:30.532954"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.3ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Opera House"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.536156"], ["updated_at", "2017-10-06 03:41:30.536156"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Main Street Cinema"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.538955"], ["updated_at", "2017-10-06 03:41:30.538955"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Pirates of the Caribbean"], ["land_id", 2], ["created_at", "2017-10-06 03:41:30.541718"], ["updated_at", "2017-10-06 03:41:30.541718"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Haunted Mansion"], ["land_id", 2], ["created_at", "2017-10-06 03:41:30.544642"], ["updated_at", "2017-10-06 03:41:30.544642"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Splash Mountain"], ["land_id", 3], ["created_at", "2017-10-06 03:41:30.547609"], ["updated_at", "2017-10-06 03:41:30.547609"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "The Many Adventures of Winnie the Pooh"], ["land_id", 3], ["created_at", "2017-10-06 03:41:30.550259"], ["updated_at", "2017-10-06 03:41:30.550259"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Davy Crockett's Explorer Canoes"], ["land_id", 3], ["created_at", "2017-10-06 03:41:30.552856"], ["updated_at", "2017-10-06 03:41:30.552856"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Pirates Lair on Tom Sawyer Island"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.555286"], ["updated_at", "2017-10-06 03:41:30.555286"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Fantasmic!"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.557722"], ["updated_at", "2017-10-06 03:41:30.557722"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "The Golden Horseshoe Stage"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.560154"], ["updated_at", "2017-10-06 03:41:30.560154"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Frontierland Shootin' Exposition"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.562580"], ["updated_at", "2017-10-06 03:41:30.562580"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mark Twain Riverboat"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.565017"], ["updated_at", "2017-10-06 03:41:30.565017"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Sailing Ship Columbia"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.567443"], ["updated_at", "2017-10-06 03:41:30.567443"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Big Thunder Mountain Railroad"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.569844"], ["updated_at", "2017-10-06 03:41:30.569844"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Fantasy Faire"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.572423"], ["updated_at", "2017-10-06 03:41:30.572423"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Pinocchio's Daring Journey"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.574846"], ["updated_at", "2017-10-06 03:41:30.574846"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Snow White's Scary Adventures"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.577276"], ["updated_at", "2017-10-06 03:41:30.577276"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Bibbidi Bobbidi Boutique"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.579728"], ["updated_at", "2017-10-06 03:41:30.579728"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Sleeping Beauty Castle Walkthrough"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.582163"], ["updated_at", "2017-10-06 03:41:30.582163"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "King Arthur Carrousel"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.584563"], ["updated_at", "2017-10-06 03:41:30.584563"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Casey Jr. Circus Train"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.586995"], ["updated_at", "2017-10-06 03:41:30.586995"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Dumbo the Flying Elephant"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.589441"], ["updated_at", "2017-10-06 03:41:30.589441"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mr. Toad's Wild Ride"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.591880"], ["updated_at", "2017-10-06 03:41:30.591880"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Peter Pan's Flight"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.594353"], ["updated_at", "2017-10-06 03:41:30.594353"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mad Tea Party"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.596949"], ["updated_at", "2017-10-06 03:41:30.596949"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice in Wonderland"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.599664"], ["updated_at", "2017-10-06 03:41:30.599664"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Pixie Hollow"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.602391"], ["updated_at", "2017-10-06 03:41:30.602391"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Matterhorn Bobsleds"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.605042"], ["updated_at", "2017-10-06 03:41:30.605042"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Storybook Land Canal Boats"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.610335"], ["updated_at", "2017-10-06 03:41:30.610335"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "it's a small world"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.612884"], ["updated_at", "2017-10-06 03:41:30.612884"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Fantasyland Theatre"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.615380"], ["updated_at", "2017-10-06 03:41:30.615380"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Goofy's Playhouse"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.617940"], ["updated_at", "2017-10-06 03:41:30.617940"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Donald's Boat"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.620512"], ["updated_at", "2017-10-06 03:41:30.620512"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Gadget's Go Coaster"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.623074"], ["updated_at", "2017-10-06 03:41:30.623074"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Chip 'n Dale Treehouse"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.626091"], ["updated_at", "2017-10-06 03:41:30.626091"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mickey's House and Meet Mickey"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.628726"], ["updated_at", "2017-10-06 03:41:30.628726"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Minnie's House"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.631233"], ["updated_at", "2017-10-06 03:41:30.631233"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Roger Rabbit's Car Toon Spin"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.633787"], ["updated_at", "2017-10-06 03:41:30.633787"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Finding Nemo Submarine Voyage"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.636334"], ["updated_at", "2017-10-06 03:41:30.636334"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Disneyland Monorail"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.638817"], ["updated_at", "2017-10-06 03:41:30.638817"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Autopia"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.641584"], ["updated_at", "2017-10-06 03:41:30.641584"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Star Wars Launch Bay"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.644296"], ["updated_at", "2017-10-06 03:41:30.644296"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Space Mountain"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.646886"], ["updated_at", "2017-10-06 03:41:30.646886"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tomorrowland Theater"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.649374"], ["updated_at", "2017-10-06 03:41:30.649374"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.3ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Star Tours &mdash; The Adventures Continue"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.652606"], ["updated_at", "2017-10-06 03:41:30.652606"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Astro Orbitor"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.656108"], ["updated_at", "2017-10-06 03:41:30.656108"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Buzz Lightyear Astro Blasters"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.658820"], ["updated_at", "2017-10-06 03:41:30.658820"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Enchanted Tiki Room"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.661460"], ["updated_at", "2017-10-06 03:41:30.661460"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jungle Cruise"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.664001"], ["updated_at", "2017-10-06 03:41:30.664001"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Indiana Jones Adventure"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.666562"], ["updated_at", "2017-10-06 03:41:30.666562"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tarzan's Treehouse"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.669083"], ["updated_at", "2017-10-06 03:41:30.669083"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.2ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Carnation Café"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.682886"], ["updated_at", "2017-10-06 03:41:30.682886"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Gibson Girl Ice Cream Parlor"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.686914"], ["updated_at", "2017-10-06 03:41:30.686914"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Refreshment Corner"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.690094"], ["updated_at", "2017-10-06 03:41:30.690094"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Market House"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.693259"], ["updated_at", "2017-10-06 03:41:30.693259"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Plaza Inn"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.696538"], ["updated_at", "2017-10-06 03:41:30.696538"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jolly Holiday Bakery Café"], ["land_id", 1], ["created_at", "2017-10-06 03:41:30.699764"], ["updated_at", "2017-10-06 03:41:30.699764"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Royal Street Veranda"], ["land_id", 2], ["created_at", "2017-10-06 03:41:30.702804"], ["updated_at", "2017-10-06 03:41:30.702804"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Blue Bayou Restaurant"], ["land_id", 2], ["created_at", "2017-10-06 03:41:30.705860"], ["updated_at", "2017-10-06 03:41:30.705860"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Café Orléans"], ["land_id", 2], ["created_at", "2017-10-06 03:41:30.708832"], ["updated_at", "2017-10-06 03:41:30.708832"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.5ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "French Market Restaurant"], ["land_id", 2], ["created_at", "2017-10-06 03:41:30.711967"], ["updated_at", "2017-10-06 03:41:30.711967"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Harbour Galley"], ["land_id", 3], ["created_at", "2017-10-06 03:41:30.714754"], ["updated_at", "2017-10-06 03:41:30.714754"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hungry Bear Restaurant"], ["land_id", 3], ["created_at", "2017-10-06 03:41:30.717942"], ["updated_at", "2017-10-06 03:41:30.717942"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "River Belle Terrace"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.721069"], ["updated_at", "2017-10-06 03:41:30.721069"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Stage Door Café"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.723968"], ["updated_at", "2017-10-06 03:41:30.723968"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.4ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "The Golden Horseshoe"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.728208"], ["updated_at", "2017-10-06 03:41:30.728208"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Rancho de Zocalo Restaurante"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.731258"], ["updated_at", "2017-10-06 03:41:30.731258"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Ship to Shore Marketplace"], ["land_id", 4], ["created_at", "2017-10-06 03:41:30.734713"], ["updated_at", "2017-10-06 03:41:30.734713"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Maurice's Treats"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.737987"], ["updated_at", "2017-10-06 03:41:30.737987"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Village Haus"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.741129"], ["updated_at", "2017-10-06 03:41:30.741129"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Troubadour Tavern"], ["land_id", 5], ["created_at", "2017-10-06 03:41:30.744334"], ["updated_at", "2017-10-06 03:41:30.744334"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Toontown Dining"], ["land_id", 6], ["created_at", "2017-10-06 03:41:30.747653"], ["updated_at", "2017-10-06 03:41:30.747653"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Galactic Grill"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.750665"], ["updated_at", "2017-10-06 03:41:30.750665"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "The Spirit of Refreshment"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.754008"], ["updated_at", "2017-10-06 03:41:30.754008"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Redd Rockett's Pizza Port"], ["land_id", 7], ["created_at", "2017-10-06 03:41:30.757375"], ["updated_at", "2017-10-06 03:41:30.757375"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tiki Juice Bar"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.760410"], ["updated_at", "2017-10-06 03:41:30.760410"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Aladdin's Oasis"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.770050"], ["updated_at", "2017-10-06 03:41:30.770050"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLand Load (0.1ms)[0m  [1m[34mSELECT  "lands".* FROM "lands" WHERE "lands"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "dinings" ("name", "land_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Bengal Barbecue"], ["land_id", 8], ["created_at", "2017-10-06 03:41:30.772828"], ["updated_at", "2017-10-06 03:41:30.772828"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/lands" for 127.0.0.1 at 2017-10-05 20:41:59 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LandsController#index as HTML
+  [1m[36mLand Load (0.4ms)[0m  [1m[34mSELECT "lands".* FROM "lands"[0m
+Completed 200 OK in 14ms (Views: 6.4ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/attractions" for 127.0.0.1 at 2017-10-05 20:42:06 -0700
+Processing by AttractionsController#index as HTML
+  [1m[36mAttraction Load (0.7ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions"[0m
+Completed 200 OK in 30ms (Views: 16.9ms | ActiveRecord: 9.3ms)
+
+
+Started GET "/lands" for 127.0.0.1 at 2017-10-05 20:44:00 -0700
+Processing by LandsController#index as HTML
+  [1m[36mLand Load (0.6ms)[0m  [1m[34mSELECT "lands".* FROM "lands"[0m
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/lands" for 127.0.0.1 at 2017-10-05 20:46:03 -0700
+Processing by LandsController#index as HTML
+  [1m[36mLand Load (0.3ms)[0m  [1m[34mSELECT "lands".* FROM "lands"[0m
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.3ms)
+
+
